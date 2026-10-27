@@ -21,6 +21,12 @@ type WireGuardPeer struct {
 	PublicKey   string   `json:"public_key"`
 	AllowedIPs  []string `json:"allowed_ips"`
 
+	// InterfaceIPv6 is the peer's tunnel address within the server's
+	// ipv6_subnet, for a server created with one (the UI's "IPv6
+	// Gateway/Subnet"). The controller omits the field for a peer without
+	// one, so it is a pointer with omitempty, as PresharedKey.
+	InterfaceIPv6 *string `json:"interface_ipv6,omitempty"`
+
 	// PresharedKey is the optional WireGuard pre-shared key (the UI's
 	// "Pre-Shared Key" toggle). The controller stores and returns it in clear
 	// text, and omits the field entirely when the peer has none.
